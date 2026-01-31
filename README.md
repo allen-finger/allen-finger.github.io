@@ -1,1 +1,266 @@
-# allen-finger.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allen Finger — Photography</title>
+  <meta name="description" content="Photography portfolio showcasing landscapes, portraits, and experimental work." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --fg: #f2f2f2;
+      --muted: #9a9a9a;
+      --accent: #e6c27a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      max-width: 600px;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    nav {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 400;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 4rem 6vw;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
+      opacity: 0.9;
+    }
+
+    .about {
+      max-width: 700px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 2rem 6vw;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-top: 1px solid #1f1f1f;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      header p {
+        font-size: 1rem;
+      }
+    }
+	
+	/* Lightbox overlay */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  animation: zoomIn 0.25s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+  </style>
+</head>
+
+
+
+<body>
+
+  <header>
+    <h1>Allen Finger</h1>
+    <p>Photography exploring light, texture, and quiet moments — landscapes, portraits, and experimental work.</p>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="work">
+    <h2>Selected Work</h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <p class="about">
+      I’m a photographer focused on capturing atmosphere and emotion through natural light and composition. My work draws from travel, everyday environments, and moments that often go unnoticed.
+    </p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="about">
+      For commissions, collaborations, or prints, reach out at
+      <a href="allenfingerart@gmail.com">allenfingerart@gmail.com</a> or find me on Instagram.
+    </p>
+  </section>
+
+  <footer>
+    <span>© 2026 Allen Finger</span>
+    <span>
+      <a href="https://www.instagram.com/allen.finger/">Instagram</a> ·
+      <a href="#">Print Shop - coming soon!</a>
+    </span>
+  </footer>
+
+<div class="lightbox" id="lightbox">
+  <img src="" alt="">
+</div>
+
+  <script>
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = lightbox.querySelector('img');
+  const totalImages = 326;
+
+  for (let i = 1; i <= totalImages; i++) {
+    const img = document.createElement('img');
+    img.src = `images/photo (${i}).jpeg`; // make sure filenames match
+    img.alt = `Photography work ${i}`;
+    img.loading = 'lazy';
+
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+    });
+
+    gallery.appendChild(img);
+  }
+
+  // Click anywhere to close
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    lightboxImg.src = '';
+  });
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    }
+  });
+</script>
+
+
+</body>
+</html>
